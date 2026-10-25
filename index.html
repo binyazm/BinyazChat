@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17212b">
+  <meta name="description" content="BINYAZ CHAT — پیام‌رسان آنلاین برای گفتگو با دوستان">
+  <title>BINYAZ CHAT</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <main id="auth-view" class="auth-screen">
+    <section class="auth-card">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="42" height="42">
+            <circle cx="24" cy="24" r="24" fill="#3390ec"/>
+            <path d="M11 23 36 12 29 37 22 29 17 33 18 26Z" fill="white"/>
+          </svg>
+        </div>
+        <h1>BINYAZ <span>CHAT</span></h1>
+        <p>پیام‌رسان تو، ارتباط تو</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="login-tab" class="auth-tab active" type="button">ورود</button>
+        <button id="signup-tab" class="auth-tab" type="button">ثبت‌نام</button>
+      </div>
+
+      <form id="auth-form">
+        <label for="email">ایمیل</label>
+        <input id="email" name="email" type="email"
+          placeholder="you@example.com" autocomplete="email" required>
+
+        <div id="username-field" class="hidden">
+          <label for="username">نام کاربری</label>
+          <input id="username" name="username" type="text"
+            placeholder="مثلاً binyaz_user"
+            autocomplete="username" minlength="3" maxlength="24">
+          <small>۳ تا ۲۴ حرف انگلیسی، عدد یا زیرخط</small>
+        </div>
+
+        <label for="password">رمز عبور</label>
+        <input id="password" name="password" type="password"
+          placeholder="حداقل ۶ کاراکتر" autocomplete="current-password"
+          minlength="6" required>
+
+        <button id="auth-submit" class="primary-btn" type="submit">ورود</button>
+      </form>
+
+      <p class="auth-note">با دوستانت ارتباط بگیر؛ هر زمان و هر جا.</p>
+    </section>
+  </main>
+
+  <main id="app-view" class="app-layout hidden">
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <button id="profile-btn" class="icon-btn avatar my-avatar"
+          type="button" aria-label="پروفایل">
+          <span id="my-avatar">B</span>
+        </button>
+        <div class="sidebar-brand">
+          <strong>BINYAZ CHAT</strong>
+          <small>پیام‌رسان آنلاین</small>
+        </div>
+        <button id="install-btn" class="icon-btn hidden"
+          type="button" aria-label="نصب برنامه" title="نصب برنامه">↓</button>
+        <button id="logout-btn" class="icon-btn"
+          type="button" aria-label="خروج" title="خروج">↪</button>
+      </header>
+
+      <div class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search"
+          placeholder="جست‌وجوی نام کاربری..." autocomplete="off">
+      </div>
+
+      <div class="list-heading">
+        <span id="search-hint">گفت‌وگوها</span>
+      </div>
+
+      <div id="chat-list" class="chat-list">
+        <div class="empty-state">در حال بارگذاری...</div>
+      </div>
+
+      <footer class="sidebar-footer">
+        BINYAZ CHAT · نسخه اولیه
+      </footer>
+    </aside>
+
+    <section class="chat-area">
+      <div id="welcome-panel" class="welcome-panel">
+        <div class="welcome-icon" aria-hidden="true">✈</div>
+        <h2>به BINYAZ CHAT خوش آمدی</h2>
+        <p>یک کاربر را جست‌وجو کن و گفت‌وگوی جدیدی شروع کن.</p>
+      </div>
+
+      <header id="chat-header" class="chat-header hidden">
+        <button id="back-btn" class="icon-btn back-btn"
+          type="button" aria-label="بازگشت">→</button>
+        <div id="active-avatar" class="avatar">B</div>
+        <div class="active-user">
+          <strong id="active-name">کاربر</strong>
+          <small id="active-handle">@username</small>
+        </div>
+      </header>
+
+      <div id="messages" class="messages hidden"
+        aria-live="polite" aria-label="پیام‌ها"></div>
+
+      <form id="message-form" class="message-form hidden">
+        <textarea id="message-input" rows="1" maxlength="4000"
+          placeholder="پیامت را بنویس..." aria-label="متن پیام"
+          required></textarea>
+        <button type="submit" aria-label="ارسال پیام">➤</button>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="profile-dialog" class="profile-dialog">
+    <form method="dialog" class="dialog-close-row">
+      <h2>پروفایل من</h2>
+      <button class="icon-btn" aria-label="بستن">×</button>
+    </form>
+    <label for="profile-name">نام نمایشی</label>
+    <input id="profile-name" type="text" maxlength="60">
+    <label for="profile-handle">نام کاربری</label>
+    <input id="profile-handle" type="text" readonly>
+    <button id="save-profile" class="primary-btn" type="button">
+      ذخیره تغییرات
+    </button>
+  </dialog>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
