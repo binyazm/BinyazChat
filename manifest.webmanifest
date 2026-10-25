@@ -1,0 +1,33 @@
+
+{
+  "id": "./",
+  "name": "BINYAZ CHAT",
+  "short_name": "BINYAZ",
+  "description": "پیام‌رسان آنلاین BINYAZ CHAT",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e7edf1",
+  "theme_color": "#17212b",
+  "categories": [
+    "social",
+    "communication"
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
